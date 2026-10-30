@@ -7,7 +7,7 @@ description: "Entry skill for ys-team v1: route by irreversibility x uncertainty
 
 <what-to-do>
 
-按当前意图处理：
+需要读取项目配置或状态时，先按下方「入口判断」检查接入完整性，再按当前意图处理：
 
 1. **路由请求**：读取 `.ys_team/config.yaml`、`.ys_team/rules.md`、`.ys_team/reality.md`；按“不可逆性 × 不确定性”判断是直接执行、patch 还是 spec。
 2. **状态查询**：读取 `.ys_team/status.md`，输出活跃工作、阻塞项、最近判断和需要用户决策的点。
@@ -56,8 +56,9 @@ ys-team v1 是 verifier-first 的 AI coding workflow。agent 原生会循环执�
 
 ### 入口判断
 
-- 仓库没有 `.ys_team/`：引导到 `ys-team-init`。
+- 检查 `.ys_team/config.yaml`、`.ys_team/rules.md`、`.ys_team/reality.md` 是否齐全；缺任一文件时，标记「接入不完整」、列出缺项并引导 `ys-team-init` 补齐，不仅凭目录存在判断已接入。
 - `.ys_team/` 与项目现实明显不符：引导 `ys-team-init --rebuild`。
+- 三个文件齐全且无需重建时直接继续，不重复初始化。
 - 命中项目本地 SOP：先路由，再加载本地 SOP 的交付清单和 verifier 要求。
 - UI/交互、权限、支付、数据迁移、发布链路等高风险场景：默认要求更高保真 verifier。
 

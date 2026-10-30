@@ -9,12 +9,12 @@ description: "Initialize or rebuild a repository-local ys-team v1 baseline: rule
 
 被调用时立即执行：
 
-1. 检查仓库根是否存在 `.ys_team/`。
-2. 不存在：Init 模式，复制 v1 baseline，生成约束与风险地图骨架，创建 docs/specs 目录。
-3. 已存在：Rebuild 模式，对比 baseline 版本，提示并最小化同步 v1 模板。
+1. 检查仓库根的 `.ys_team/` 及其中 `config.yaml`、`rules.md`、`reality.md` 是否齐全。
+2. 目录不存在：Init 模式，复制 v1 baseline，生成约束与风险地图骨架，创建 docs/specs 目录。
+3. 目录已存在：从 baseline 补齐上述缺失文件，不覆盖已有文件；对比 baseline 版本，仅在需要升级或项目现实变化时执行 Rebuild 同步，文件齐全且无需重建时不重复初始化。
 4. 检测旧结构：`role-pool.yaml`、`governance_slots`、`slot_bindings`、按角色命名的记忆文件、旧 checklist 流程项、旧 `AGENTS.md` / `CLAUDE.md` 入口口径。
 5. 保留本地定制，不覆盖项目 SOP。
-6. 输出变更清单和后续建议。
+6. 输出变更清单前，复查上述三个文件；仍有缺失时列出缺项并标记「接入不完整」，不得宣称初始化完成。
 
 </what-to-do>
 
